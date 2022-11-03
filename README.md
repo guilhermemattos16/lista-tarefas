@@ -7,60 +7,54 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
 </p>
 
-## About Laravel
+## Sobre o Projeto - Lista de Tarefas
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+É um sistema web para cadastro de Tarefas utilizando Laravel, os dados são mantidos em um banco de dados MySQL.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Base de dados
+Tabela: Tarefas
+Campos:
+- Identificador da tarefa (chave primária)
+- Nome da tarefa
+- Custo (R$)
+- Data limite
+- Ordem de apresentação (campo numérico, não repetido, que servirá para ordenar os registros na tela)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+##Funcionalidades:
+# Lista de Tarefas
+É a página principal do sistema.
+Deve listar todos os registros mantidos na tabela Tarefas; (um abaixo do outro).
+Todos os campos, exceto Ordem de apresentação, são apresentados.
+As tarefas são apresentadas ordenadas pelo campo Ordem de apresentação.
+A tarefa que tem o Custo, maior ou igual a R$1.000,00 é apresentada de forma diferente.
+Ao lado direito de cada registro são apresentados dois botões com icones, um para executar a função de Editar e outro para a função de Excluir registro.
+Ao final da listagem existe um botão para executar a função de Incluir registro.
 
-## Learning Laravel
+# Excluir
+A função deve excluir o registro da Tarefa escolhida.
+É apresentado uma mensagem de confirmação (Sim/Não) para a realização da exclusão.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+# Editar
+A função serve para editar o registro da Tarefa escolhida.
+Só é possível alterar o Nome da Tarefa, o Custo e a Data Limite.
+Existem validações para verificar se o novo nome da tarefa já existe na base de dados. Se já existir, a alteração não poderá ser feita.
+Ao clicar no botão é aberto uma nova janela para edição dos três campos.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+# Incluir
+A função serve para a inclusão de uma nova tarefa.
+Apenas os campos Nome da Tarefa, Custo e Data Limite são informados pelo usuário.
+Os demais campos são gerados automaticamente pelo sistema.
+O registro recém-criado será o último na ordem de apresentação.
+Não pode haver duas tarefas com o mesmo nome.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+# Reordenação das tarefas
+A função serve para permitir que o usuário possa alterar a ordem de apresentação de uma tarefa.
+Em cada linha existem dois botões, um para subir a tarefa na ordem de apresentação e outro para descer. 
+Obviamente a primeira tarefa não pode subir e nem a última pode descer.
 
-## Laravel Sponsors
+## Imagens
+<img src="https://github.com/guilhermemattos16/lista-tarefas/public/imagens/print1.bmp" width="500" height="333">
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+<img src="https://github.com/guilhermemattos16/lista-tarefas/public/imagens/print2.bmp" width="500" height="333">
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+<img src="https://github.com/guilhermemattos16/lista-tarefas/public/imagens/print3.bmp" width="500" height="333">
