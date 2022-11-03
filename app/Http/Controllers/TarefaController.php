@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\tarefa;
 use App\Http\Requests\StoretarefaRequest;
 use App\Http\Requests\UpdatetarefaRequest;
+use Illuminate\Http\Request;
 
 class TarefaController extends Controller
 {
@@ -44,12 +45,12 @@ class TarefaController extends Controller
             'data' => 'required',
         ]);
 
-        $ultimo = tarefa::orderBy('created_at', 'desc')->first();
+        $ultimo = tarefa::orderBy('ordem', 'desc')->first();
 
         if($ultimo == NULL) {
             $ordem = 1;
         } else {
-            $ordem = $ultimo->id + 1;
+            $ordem = $ultimo->ordem + 1;
         }
 
         $tarefa = tarefa::create([
@@ -84,8 +85,6 @@ class TarefaController extends Controller
      */
     public function edit(tarefa $tarefa)
     {
-        //$tarefa = tarefa::findOrFail($tarefa->id);
- 
         if ($tarefa) {
             return view('tarefas.update', compact('tarefa'));
         } else {
@@ -102,6 +101,8 @@ class TarefaController extends Controller
      */
     public function update(UpdatetarefaRequest $request, tarefa $tarefa)
     {
+        
+        //dd($tarefa);
         //$tarefa = tarefa::where('id', $id)->update($request->except('_token', '_method'));
         $validated = $request->validate([
             'nome' => 'required|unique:tarefas|max:255',
@@ -109,10 +110,10 @@ class TarefaController extends Controller
             'data' => 'required',
         ]);
 
-        $tarefa = tarefa::update($request->except('_token', '_method'));
- 
-        if ($tarefa) {
-            return redirect()->route('index')->with('success',"Tarefa ".$tarefa->nome." atualizada com sucesso");
+        $novo = tarefa::find($tarefa->id)->update($request->except('_token', '_method'));
+
+        if ($novo) {
+            return redirect()->route('index')->with('success','Tarefa '. $tarefa->nome .' foi atualizada com sucesso');
         }
     }
 
@@ -122,11 +123,27 @@ class TarefaController extends Controller
      * @param  \App\Models\tarefa  $tarefa
      * @return \Illuminate\Http\Response
      */
-    public function destroy(tarefa $tarefa)
+    public function destroy($id)
     {
+        $tarefa = tarefa::findOrFail($id);
+
+        $objetos = tarefa::orderBy('ordem')->get();
+        // dd($objetos);
+        $ultimo = $objetos->last();
+
+        $ordem = $tarefa->ordem;
+
         if (isset($tarefa)){
             $tarefa->delete();
         }
-        return redirect()->route('index')->with('info', 'A Tarefa foi excluida com sucesso!');
+
+        for ($i=$ordem; $i < $ultimo->ordem; $i++) { 
+            if($objetos[$i]->ordem != NULL) {
+                tarefa::find($objetos[$i]->id)->update(['ordem' => $ordem]);
+                $ordem += 1;
+            }
+        }
+        
+        return redirect()->route('index')->with('success', 'A Tarefa foi excluida com sucesso!');
     }
 }

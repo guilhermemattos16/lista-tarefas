@@ -16,6 +16,9 @@ use App\Http\Controllers\TarefaController;
 
 Route::resource('/', 'App\Http\Controllers\TarefaController');
 
+Route::get('{tarefa}/edit', ['as' => 'tarefa.edit', 'uses' => 'App\Http\Controllers\TarefaController@edit']);
+Route::delete('{tarefa}', ['as' => 'tarefa.destroy', 'uses' => 'App\Http\Controllers\TarefaController@destroy']);
+Route::put('{tarefa}', ['as' => 'tarefa.update', 'uses' => 'App\Http\Controllers\TarefaController@update']);
 // Route::get('/', [TarefaController::class, 'index'])->name('home');
 
 // Route::get('/create', [TarefaController::class, 'create'])->name('criar');

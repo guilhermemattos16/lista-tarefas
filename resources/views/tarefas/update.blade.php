@@ -30,25 +30,26 @@
                     <div class="card">
                         <div class="card-body">
                             <!-- form start -->
-                            <form role="form" action="{{route('criar-tarefa')}}" method="post">
+                            <form role="form" action="{{route('update', $tarefa)}}" method="POST">
                                 @csrf
+                                @method('put')
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="nome">Nome</label>
-                                        <input class="form-control" name="nome" type="text" placeholder="Nome da Tarefa" required>
+                                        <input class="form-control" name="nome" value="{{ $tarefa->nome}}" type="text" placeholder="Nome da Tarefa" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="custo">Custo</label>
-                                        <input class="form-control" name="custo" step="0.01" placeholder="0.00" type="number" required>
+                                        <input class="form-control" name="custo" step="0.01" value="{{ $tarefa->custo}}" placeholder="0.00" type="number" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="data">Data Limite</label>
-                                        <input type="date" class="form-control" name="data" required>
+                                        <input type="date" class="form-control" name="data" value="{{ \Carbon\Carbon::parse($tarefa->data)->format('Y-m-d')}}" required>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Editar</button>
                                 </div>
                             </form>
                         </div>
