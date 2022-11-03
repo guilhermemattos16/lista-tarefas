@@ -20,8 +20,8 @@ Campos:
 - Data limite
 - Ordem de apresentação (campo numérico, não repetido, que servirá para ordenar os registros na tela)
 
-##Funcionalidades:
-# Lista de Tarefas
+## Funcionalidades:
+### Lista de Tarefas
 É a página principal do sistema.
 Deve listar todos os registros mantidos na tabela Tarefas; (um abaixo do outro).
 Todos os campos, exceto Ordem de apresentação, são apresentados.
@@ -30,31 +30,29 @@ A tarefa que tem o Custo, maior ou igual a R$1.000,00 é apresentada de forma di
 Ao lado direito de cada registro são apresentados dois botões com icones, um para executar a função de Editar e outro para a função de Excluir registro.
 Ao final da listagem existe um botão para executar a função de Incluir registro.
 
-# Excluir
+### Excluir
 A função deve excluir o registro da Tarefa escolhida.
 É apresentado uma mensagem de confirmação (Sim/Não) para a realização da exclusão.
 
-# Editar
+### Editar
 A função serve para editar o registro da Tarefa escolhida.
 Só é possível alterar o Nome da Tarefa, o Custo e a Data Limite.
 Existem validações para verificar se o novo nome da tarefa já existe na base de dados. Se já existir, a alteração não poderá ser feita.
 Ao clicar no botão é aberto uma nova janela para edição dos três campos.
 
-# Incluir
+### Incluir
 A função serve para a inclusão de uma nova tarefa.
 Apenas os campos Nome da Tarefa, Custo e Data Limite são informados pelo usuário.
 Os demais campos são gerados automaticamente pelo sistema.
 O registro recém-criado será o último na ordem de apresentação.
 Não pode haver duas tarefas com o mesmo nome.
 
-# Reordenação das tarefas
+### Reordenação das tarefas
 A função serve para permitir que o usuário possa alterar a ordem de apresentação de uma tarefa.
 Em cada linha existem dois botões, um para subir a tarefa na ordem de apresentação e outro para descer. 
 Obviamente a primeira tarefa não pode subir e nem a última pode descer.
 
 ## Imagens
-<img src="https://github.com/guilhermemattos16/lista-tarefas/public/imagens/print1.bmp" width="500" height="333">
-
-<img src="https://github.com/guilhermemattos16/lista-tarefas/public/imagens/print2.bmp" width="500" height="333">
-
-<img src="https://github.com/guilhermemattos16/lista-tarefas/public/imagens/print3.bmp" width="500" height="333">
+![Print da Tela Inicial](public/imagens/print1.png)
+![Print da Tela de Cadastro](public/imagens/print2.bmp)
+![Print da Tela de Exclusão](public/imagens/print3.bmp)
