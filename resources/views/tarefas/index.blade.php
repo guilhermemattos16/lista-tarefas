@@ -31,10 +31,6 @@
               <div class="card-body">
                 <!-- Trigger the modal with a button -->
                 {{-- <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button> --}}
-                
-                <div style="margin-bottom: 20px" class="float-right">
-                  <a type="button" class="btn btn-sm btn-primary " href="{{route('create')}}">Incluir Tarefa</a>
-                </div>
                 <table id="example2" class="table table-bordered table-hover">
                   <thead>
                   <tr>
@@ -48,24 +44,50 @@
                   <tbody>
                   @foreach ($tarefas as $tarefa)
                   @if ($tarefa->custo >= 1000)
-                    <tr style="background:yellow">
+                    <tr style="background:rgba(255,255,0,0.4)">
                   @else
                     <tr>
                   @endif
-                    <td>{{$tarefa->nome}}</td>
-                    <td>{{$tarefa->custo}}</td>
-                    <td> {{ \Carbon\Carbon::parse($tarefa->data)->format('d/m/Y')}} </td>
-                    <td>{{$tarefa->ordem}}</td>
-                    <td>
-                      <a href="{{route('edit', $tarefa)}}" class="btn btn-sm btn-warning my-1">Editar</a>
-                      <a href="#modalExcluir" class="btn btn-danger btn-sm my-1" data-toggle="modal" id="{{$tarefa->id}}" onclick="alertId(this.id , '{{ route('destroy',$tarefa->id) }}')" data-nome="{{$tarefa->nome}}" data-rota="{{ route('destroy',$tarefa->id) }}">Excluir</a>
-                    </td>
-                  </tr>
+                      <td style="width: 50%">{{$tarefa->nome}}</td>
+                      <td>{{$tarefa->custo}}</td>
+                      <td style="width: 10%"> {{ \Carbon\Carbon::parse($tarefa->data)->format('d/m/Y')}} </td>
+
+                      <td style="width: 5%" class="text-center">
+                          {{-- {{$tarefa->ordem}}  --}}
+                          <div>
+                          @if($tarefa->ordem > 1)
+                            <form method="POST" action="{{route('sobe', $tarefa)}}">
+                              @csrf
+                              @method('PUT')
+                              <button class="btn btn-xs" type="submit"><i class="fas fa-chevron-up"></i></button>
+                            </form>
+                          @endif
+                          @if($ultimo->ordem != $tarefa->ordem)
+                            <form method="POST" action="{{route('desce', $tarefa)}}">
+                              @csrf
+                              @method('PUT')
+                              <button class="btn btn-xs" type="submit"><i class="fas fa-chevron-down"></i></button>
+                            </form>
+                          @endif
+                        </div>
+                      </td>
+
+                      <td style="width: 10%">
+                        <a href="{{route('edit', $tarefa)}}" class="btn btn-sm btn-primary my-1"><i class="fas fa-pen" ></i></a>
+                        <a href="#modalExcluir" class="btn btn-danger btn-sm my-1" data-toggle="modal" id="{{$tarefa->id}}" onclick="alertId(this.id , '{{ route('destroy',$tarefa->id) }}')" data-rota="{{ route('destroy',$tarefa->id) }}"><i class="fas fa-trash"></i></a>
+                      </td>
+                    </tr>
                   @endforeach
                   </tbody>
                 </table>
+                
+                <div style="margin-top: 20px" class="float-right">
+                  <a type="button" class="btn btn-xg btn-success " href="{{route('create')}}">Incluir Tarefa</a>
+                </div>
               </div>
+              
             </div>
+            
             </div>
           </div>
         </div>

@@ -17,8 +17,9 @@ class TarefaController extends Controller
     public function index()
     {
         $tarefas = tarefa::orderBy('ordem')->get();
+        $ultimo = tarefa::orderBy('ordem', 'desc')->first();
         
-        return view('tarefas.index', compact('tarefas'));
+        return view('tarefas.index', compact('tarefas', 'ultimo'));
     }
 
     /**
@@ -145,5 +146,26 @@ class TarefaController extends Controller
         }
         
         return redirect()->route('index')->with('success', 'A Tarefa foi excluida com sucesso!');
+    }
+
+    public function sobe(tarefa $tarefa)
+    {
+        $ordem = $tarefa->ordem;
+
+        $aux = tarefa::where('ordem', $ordem-1)->first();
+        tarefa::where('ordem',$ordem)->update(['ordem' => $ordem-1]);
+        tarefa::find($aux->id)->update(['ordem' => $ordem]);
+        return redirect()->route('index');
+    }
+
+    public function desce(tarefa $tarefa)
+    {
+        // dd($tarefa);
+        $ordem = $tarefa->ordem;
+
+        $aux = tarefa::where('ordem', $ordem+1)->first();
+        tarefa::where('ordem',$ordem)->update(['ordem' => $ordem+1]);
+        tarefa::find($aux->id)->update(['ordem' => $ordem]);
+        return redirect()->route('index');
     }
 }
