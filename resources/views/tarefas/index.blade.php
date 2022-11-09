@@ -1,6 +1,4 @@
-@extends('adminlte::page')
-
-@section('title', 'Lista de Tarefas')
+@extends('layout')
 
 @section('content')
 
