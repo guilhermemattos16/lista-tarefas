@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('tarefas.layout')
 
 @section('content')
 
