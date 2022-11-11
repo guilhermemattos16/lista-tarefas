@@ -42,8 +42,8 @@ class TarefaController extends Controller
     {
         $validated = $request->validate([
             'nome' => 'required|unique:tarefas|max:255',
-            'custo' => 'required',
-            'data' => 'required',
+            'custo' => 'required|max:20',
+            'data' => 'required|date',
         ]);
 
         $ultimo = tarefa::orderBy('ordem', 'desc')->first();
@@ -102,16 +102,20 @@ class TarefaController extends Controller
      */
     public function update(UpdatetarefaRequest $request, tarefa $tarefa)
     {
-        
-        //dd($tarefa);
-        //$tarefa = tarefa::where('id', $id)->update($request->except('_token', '_method'));
-        $validated = $request->validate([
-            'nome' => 'required|unique:tarefas|max:255',
-            'custo' => 'required',
-            'data' => 'required',
-        ]);
+        $request->validate([
+            'custo' => 'required|max:20',
+            'data' => 'date'
+        ]) ;
 
-        $novo = tarefa::find($tarefa->id)->update($request->except('_token', '_method'));
+        $tarefaAntiga = tarefa::find($tarefa->id);
+
+        if ($request->nome != $tarefaAntiga->nome) {
+            $request->validate([
+                'nome' => 'required|unique:tarefas|max:255',
+            ]);
+        }
+
+        $novo = $tarefaAntiga->update($request->except('_token', '_method'));
 
         if ($novo) {
             return redirect()->route('index')->with('success','Tarefa '. $tarefa->nome .' foi atualizada com sucesso');
