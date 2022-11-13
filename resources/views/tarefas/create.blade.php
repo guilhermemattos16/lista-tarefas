@@ -43,7 +43,7 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="data">Data Limite</label>
-                                        <input type="date" class="form-control" name="data" required>
+                                        <input type="date" class="form-control" max="9999-12-31" name="data" required>
                                     </div>
                                 </div>
                                 <!-- /.card-body -->
